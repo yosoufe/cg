@@ -1,0 +1,11 @@
+prefix=/home/yousof/courses/computer_graphics/udemy/glew/build/install
+exec_prefix=${prefix}
+libdir=/home/yousof/courses/computer_graphics/udemy/glew/build/install/lib
+includedir=${prefix}/include
+
+Name: glew
+Description: The OpenGL Extension Wrangler library
+Version: 2.2.0
+Cflags: -I${includedir} 
+Libs: -L${libdir} -lGLEW 
+Requires: glu
