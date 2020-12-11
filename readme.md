@@ -1,8 +1,13 @@
 # Practice with OpenGl and learn about Computer Graphics
 
+## How I built the glew and glfw:
+I already built them and added them to `3rdParty` dir here. b
+but this is how I compiled them as personal documentation:
 
 
-Download [glew](http://glew.sourceforge.net/) and glfw and extract them, then build them as follow in ubuntu.
+Download [glew](http://glew.sourceforge.net/) and 
+[glfw](https://www.glfw.org/download.html) and extract 
+them, then build them as follow in ubuntu.
 
 ```bash
 git clone https://github.com/nigels-com/glew.git

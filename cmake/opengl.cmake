@@ -5,3 +5,6 @@ if (GLEW_FOUND)
 endif()
 
 find_package(glfw3 3.3 REQUIRED PATHS "${PROJECT_SOURCE_DIR}/3rdParty/glfw/lib/cmake")
+
+find_package(OpenGL REQUIRED)
+include_directories(${OPENGL_INCLUDE_DIRS})
