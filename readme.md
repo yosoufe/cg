@@ -32,3 +32,12 @@ make -j20 install
 ```
 
 Then moved the `install` directories into the 3rdParty directory of this repo.
+
+## GLM: OpenGLMathematics
+
+Download [GML](http://glm.g-truc.net/)
+
+```
+cd 3rdParty
+git submodule add git@github.com:g-truc/glm.git
+```
