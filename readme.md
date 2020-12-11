@@ -1,5 +1,7 @@
 # Practice with OpenGl and learn about Computer Graphics
 
+Following a udemy course: https://www.udemy.com/course/graphics-with-modern-opengl/
+
 ## How I built the glew and glfw:
 I already built them and added them to `3rdParty` dir here. b
 but this is how I compiled them as personal documentation:
