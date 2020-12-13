@@ -41,3 +41,29 @@ Download [GML](http://glm.g-truc.net/)
 cd 3rdParty
 git submodule add git@github.com:g-truc/glm.git
 ```
+
+# Usage:
+It is tested on Ubuntu. Install the apt packages in section above. 
+Download and install your latest Graphics Card Driver. 
+I tested with Nvidia card. Then
+
+### to clone:
+```
+git clone https://github.com/yosoufe/cg.git
+cd cg
+git submodule init --update --recursive
+```
+
+### to compile
+```
+mkdir build && cd build
+cmake ..
+make
+```
+
+### to run
+```
+# in build directory
+./main
+
+```
