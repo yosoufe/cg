@@ -9,6 +9,7 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
+#include "glm/gtx/string_cast.hpp"
 
 #include "Mesh.hpp"
 #include "Shader.hpp"
@@ -103,6 +104,10 @@ int main()
         glfwPollEvents();
 
         camera.keyControl(mainWindow.getKeys(), deltaTime);
+        // std::cout << mainWindow.getXChange() << " " << mainWindow.getYChange() << std::endl;
+        camera.mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
+        // std::cout << glm::to_string(camera.calculateViewMatrix()) << std::endl;
+        
 
         if (direction)
         {

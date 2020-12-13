@@ -54,5 +54,25 @@ glm::mat4 Camera::calculateViewMatrix()
     return glm::lookAt(position, position+front, up);
 }
 
+void Camera::mouseControl(GLfloat xChange, GLfloat yChange){
+    xChange *= turnSpeed;
+    yChange *= turnSpeed;
+
+    yaw += xChange;
+    pitch += yChange;
+    
+    if (pitch > 89)
+    {
+        pitch = 89;
+    }
+
+    if (pitch < -89)
+    {
+        pitch = -89;
+    }
+
+    update();
+}
+
 Camera::~Camera(){
 }

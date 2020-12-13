@@ -3,7 +3,8 @@
 Window::Window() : width(800),
                    height(600),
                    xChange(0.0f),
-                   yChange(0.0f)
+                   yChange(0.0f),
+                   mouseFirstMoved(true)
 {
     for (size_t i = 0; i < 1024; i++)
     {
@@ -14,7 +15,8 @@ Window::Window() : width(800),
 Window::Window(GLint windowWidth, GLint widnowHeight) : width(windowWidth),
                                                         height(windowWidth),
                                                         xChange(0.0f),
-                                                        yChange(0.0f)
+                                                        yChange(0.0f),
+                                                        mouseFirstMoved(true)
 {
     for (size_t i = 0; i < 1024; i++)
     {
@@ -118,6 +120,7 @@ void Window::handleKey(GLFWwindow *window, int key, int code, int action, int mo
 
 void Window::handleMouse(GLFWwindow *window, double xPose, double yPose)
 {
+    // printf("Pose: x:%.6f, y:%.6f\n", xPose, yPose);
     Window *theWindow = static_cast<Window *>(glfwGetWindowUserPointer(window));
 
     if (theWindow->mouseFirstMoved)
@@ -133,7 +136,7 @@ void Window::handleMouse(GLFWwindow *window, double xPose, double yPose)
     theWindow->lastX = xPose;
     theWindow->lastY = yPose;
 
-    // printf("x:%.6f, y:%.6f\n", theWindow->xChange, theWindow->yChange);
+    // printf("changes: x:%.6f, y:%.6f\n", theWindow->xChange, theWindow->yChange);
 }
 
 GLfloat Window::getXChange()

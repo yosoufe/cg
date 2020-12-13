@@ -25,6 +25,7 @@ public:
            GLfloat initTurnSpeed);
     
     void keyControl(bool* keys, GLfloat deltaTime);
+    void mouseControl(GLfloat xChange, GLfloat yChange);
     glm::mat4 calculateViewMatrix();
 
     ~Camera();
