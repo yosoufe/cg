@@ -13,3 +13,8 @@ message(STATUS "OPENGL_LIBRARIES: ${OPENGL_LIBRARIES}")
 set(glm_DIR "${PROJECT_SOURCE_DIR}/3rdParty/glm/cmake/glm") # if necessary
 find_package(glm REQUIRED)
 message(STATUS "GLM_INCLUDE_DIRS: ${GLM_INCLUDE_DIRS}")
+
+# stb_image
+add_library(stb_image INTERFACE)
+target_include_directories(stb_image INTERFACE ${PROJECT_SOURCE_DIR}/3rdParty/stb_image)
+

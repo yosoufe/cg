@@ -13,6 +13,7 @@ set(MAIN_SOURCE_FILES
     Shader.cpp
     Window.cpp
     Camera.cpp
+    Texture.cpp
 )
 
 set(MAIN_HEADER_FILES
@@ -20,9 +21,10 @@ set(MAIN_HEADER_FILES
     Shader.hpp
     Window.hpp
     Camera.hpp
+    Texture.hpp
 )
 
 add_executable( main ${MAIN_SOURCE_FILES} )
 
 
-target_link_libraries(main ${OPENGL_LIBRARIES} GLEW::GLEW glfw glm::glm)
+target_link_libraries(main ${OPENGL_LIBRARIES} GLEW::GLEW glfw glm::glm stb_image)

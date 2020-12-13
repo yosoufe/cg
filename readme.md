@@ -69,3 +69,6 @@ to this repo by running the following
 cd 3rdParty
 git submodule add git@github.com:g-truc/glm.git
 ```
+
+# Notes:
+You can get your texture for practicing from http://texturer.com/.
