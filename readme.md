@@ -28,7 +28,9 @@ make
 
 ```
 
-## How I built the glew and glfw:
+# How I built 3rdParty libs:
+You do not need to follow this section for using the repo.
+### glew and glfw:
 I already built them and added them to `3rdParty` dir here.
 But this is how I compiled them as personal documentation:
 
@@ -59,7 +61,7 @@ make -j20 install
 
 Then moved the `install` directories into the 3rdParty directory of this repo.
 
-## GLM: OpenGL Mathematics
+#### GLM: OpenGL Mathematics
 I included [GML](http://glm.g-truc.net/) as a submodule 
 to this repo by running the following
 
