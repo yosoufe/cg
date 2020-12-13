@@ -51,7 +51,7 @@ I tested with Nvidia card. Then
 ```
 git clone https://github.com/yosoufe/cg.git
 cd cg
-git submodule init --update --recursive
+git submodule update --init --recursive
 ```
 
 ### to compile
