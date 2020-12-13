@@ -30,11 +30,10 @@ make
 
 # How I built 3rdParty libs:
 You do not need to follow this section for using the repo on ubuntu.
-### glew and glfw:
 I already built them and added them to `3rdParty` dir here.
 But this is how I compiled them as personal documentation:
 
-
+### glew and glfw:
 Download [glew](http://glew.sourceforge.net/) and 
 [glfw](https://www.glfw.org/download.html) and extract 
 them, then build them as follow in ubuntu.
