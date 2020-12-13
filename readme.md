@@ -2,9 +2,35 @@
 
 Following a udemy course: https://www.udemy.com/course/graphics-with-modern-opengl/
 
+# Usage:
+It is tested on Ubuntu. Install the apt packages in section below. 
+Download and install your latest Graphics Card's Driver. 
+I tested with Nvidia card. Then
+
+### to clone:
+```
+git clone https://github.com/yosoufe/cg.git
+cd cg
+git submodule update --init --recursive
+```
+
+### to compile
+```
+mkdir build && cd build
+cmake ..
+make
+```
+
+### to run
+```
+# in build directory
+./main
+
+```
+
 ## How I built the glew and glfw:
-I already built them and added them to `3rdParty` dir here. b
-but this is how I compiled them as personal documentation:
+I already built them and added them to `3rdParty` dir here.
+But this is how I compiled them as personal documentation:
 
 
 Download [glew](http://glew.sourceforge.net/) and 
@@ -33,37 +59,11 @@ make -j20 install
 
 Then moved the `install` directories into the 3rdParty directory of this repo.
 
-## GLM: OpenGLMathematics
-
-Download [GML](http://glm.g-truc.net/)
+## GLM: OpenGL Mathematics
+I included [GML](http://glm.g-truc.net/) as a submodule 
+to this repo by running the following
 
 ```
 cd 3rdParty
 git submodule add git@github.com:g-truc/glm.git
-```
-
-# Usage:
-It is tested on Ubuntu. Install the apt packages in section above. 
-Download and install your latest Graphics Card Driver. 
-I tested with Nvidia card. Then
-
-### to clone:
-```
-git clone https://github.com/yosoufe/cg.git
-cd cg
-git submodule update --init --recursive
-```
-
-### to compile
-```
-mkdir build && cd build
-cmake ..
-make
-```
-
-### to run
-```
-# in build directory
-./main
-
 ```
