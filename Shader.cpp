@@ -43,6 +43,7 @@ void Shader::compileShader(const char* vertexCode, const char* fragmentCode){
 
     uniformModel = glGetUniformLocation(shaderId, "model");
     uniformProjection = glGetUniformLocation(shaderId, "projection");
+    uniformView = glGetUniformLocation(shaderId, "view");
 }
 
 void Shader::addShader(GLuint theProgram, const char* shaderCode, GLenum shaderType){
@@ -116,4 +117,8 @@ std::string Shader::readFile(const char* file){
     }
     // std::cout << content << std::endl;
     return content;
+}
+
+GLuint Shader::getViewLocation(){
+    return uniformView;
 }

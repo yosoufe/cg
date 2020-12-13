@@ -10,7 +10,7 @@
 class Shader
 {
 private:
-    GLuint shaderId, uniformProjection, uniformModel;
+    GLuint shaderId, uniformProjection, uniformModel, uniformView;
     void compileShader(const char* vertexCode, const char* fragmentCode);
     void addShader(GLuint theProgram, const char* shaderCode, GLenum shaderType);
 public:
@@ -26,4 +26,5 @@ public:
     void clearShader();
 
     std::string readFile(const char* file);
+    GLuint getViewLocation();
 };

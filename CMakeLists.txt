@@ -11,12 +11,15 @@ set(MAIN_SOURCE_FILES
     main.cpp
     Mesh.cpp
     Shader.cpp
-    Window.cpp)
+    Window.cpp
+    Camera.cpp
+)
 
 set(MAIN_HEADER_FILES
     Mesh.hpp
     Shader.hpp
     Window.hpp
+    Camera.hpp
 )
 
 add_executable( main ${MAIN_SOURCE_FILES} )
