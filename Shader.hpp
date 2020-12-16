@@ -10,21 +10,29 @@
 class Shader
 {
 private:
-    GLuint shaderId, uniformProjection, uniformModel, uniformView;
-    void compileShader(const char* vertexCode, const char* fragmentCode);
-    void addShader(GLuint theProgram, const char* shaderCode, GLenum shaderType);
+    GLuint shaderId,
+        uniformProjection,
+        uniformModel,
+        uniformView,
+        uniformAmbientIntensity,
+        uniformAmbientColor;
+    void compileShader(const char *vertexCode, const char *fragmentCode);
+    void addShader(GLuint theProgram, const char *shaderCode, GLenum shaderType);
+
 public:
     Shader();
     ~Shader();
-    void createFromString(const char* vertexCode, const char* fragmentCode);
-    void createFromFiles(const char* vertexFile, const char* fragmentFile);
+    void createFromString(const char *vertexCode, const char *fragmentCode);
+    void createFromFiles(const char *vertexFile, const char *fragmentFile);
 
     GLuint getProjectionLocation();
     GLuint getModelLocation();
+    GLuint getAmbientIntensityLocation();
+    GLuint getAmbientColorLocation();
 
     void useShader();
     void clearShader();
 
-    std::string readFile(const char* file);
+    std::string readFile(const char *file);
     GLuint getViewLocation();
 };

@@ -18,6 +18,7 @@
 #include "Window.hpp"
 #include "Camera.hpp"
 #include "Texture.hpp"
+#include "Light.hpp"
 
 const float toRadians = 3.14159265f / 180.0f;
 
@@ -55,10 +56,10 @@ void createObjects()
     GLfloat vertices[] = {
         // u and v are texture coordinates
         // x,  y,     z,       u,     v
-        -1.0f, -1.0f, 0.0f,    0.0f,  0.5f,
-         0.0f, -1.0f, 1.0f,    0.5f, -1.0f,
-         1.0f, -1.0f, 0.0f,    1.0f,  0.5f,
-         0.0f,  1.0f, 0.0f,    0.5f,  1.0f};
+        -1.0f, -1.0f, 0.0f, 0.0f, 0.5f,
+        0.0f, -1.0f, 1.0f, 0.5f, -1.0f,
+        1.0f, -1.0f, 0.0f, 1.0f, 0.5f,
+        0.0f, 1.0f, 0.0f, 0.5f, 1.0f};
 
     Mesh *obj1 = new Mesh();
     obj1->createMesh(vertices, indices, 20, 12);
@@ -90,13 +91,19 @@ int main()
                            0.0f,
                            5.0f,
                            1.0f);
-    
-    Texture brickTexture = Texture((char*)"../textures/brick.png");
+
+    Texture brickTexture = Texture((char *)"../textures/brick.png");
     brickTexture.loadTexture();
-    Texture dirtTexture = Texture((char*)"../textures/dirt.png");
+    Texture dirtTexture = Texture((char *)"../textures/dirt.png");
     dirtTexture.loadTexture();
 
-    GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0;
+    Light mainLight = Light(1.0f, 1.0f, 1.0f, 1.0f);
+
+    GLuint uniformProjection = 0,
+           uniformModel = 0,
+           uniformView = 0,
+           uniformAmbientIntensity = 0,
+           uniformAmbientColor = 0;
 
     glm::mat4 projection = glm::perspective(45.0f,
                                             (GLfloat)mainWindow.getBufferWidth() / (GLfloat)mainWindow.getBufferHeight(),
@@ -106,8 +113,8 @@ int main()
     // Loop until Window Closed
     while (!mainWindow.getShouldClose())
     {
-        GLfloat now = glfwGetTime();//returns as seconds // SDL_GetPerformanceCounter();
-        deltaTime = now - lastTime; // (now - lastTime)*1000 / SDL_GetPerformaceFrequency();
+        GLfloat now = glfwGetTime(); //returns as seconds // SDL_GetPerformanceCounter();
+        deltaTime = now - lastTime;  // (now - lastTime)*1000 / SDL_GetPerformaceFrequency();
         lastTime = now;
 
         // Get + Handler user input events
@@ -117,7 +124,6 @@ int main()
         // std::cout << mainWindow.getXChange() << " " << mainWindow.getYChange() << std::endl;
         camera.mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
         // std::cout << glm::to_string(camera.calculateViewMatrix()) << std::endl;
-        
 
         if (direction)
         {
@@ -159,9 +165,13 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         shaderList[0]->useShader();
-        uniformModel = shaderList[0]->getModelLocation();
-        uniformProjection = shaderList[0]->getProjectionLocation();
-        uniformView = shaderList[0]->getViewLocation();
+        uniformModel =              shaderList[0]->getModelLocation();
+        uniformProjection =         shaderList[0]->getProjectionLocation();
+        uniformView =               shaderList[0]->getViewLocation();
+        uniformAmbientColor =       shaderList[0]->getAmbientColorLocation();
+        uniformAmbientIntensity =   shaderList[0]->getAmbientIntensityLocation();
+
+        mainLight.useLight(uniformAmbientIntensity, uniformAmbientColor);
 
         glm::mat4 model(1.0f);
         model = glm::translate(model, glm::vec3(-0.5f, triOffset, -2.5f));
@@ -180,7 +190,7 @@ int main()
         model = glm::scale(model, glm::vec3(0.4f, 0.4f, 1.0f));
         model = glm::rotate(model, curAngle * toRadians, glm::vec3(0.0f, -1.0f, 0.0f));
         glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-        
+
         dirtTexture.useTexture();
         meshList[1]->renderMesh();
 

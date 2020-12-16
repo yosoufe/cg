@@ -1,20 +1,23 @@
-#include "Shader.hpp"  
+#include "Shader.hpp"
 
-Shader::Shader(): shaderId(0), uniformProjection(0), uniformModel(0){}
+Shader::Shader() : shaderId(0), uniformProjection(0), uniformModel(0) {}
 
 Shader::~Shader()
 {
     clearShader();
 }
 
-void Shader::createFromString(const char* vertexCode, const char* fragmentCode){
+void Shader::createFromString(const char *vertexCode, const char *fragmentCode)
+{
     compileShader(vertexCode, fragmentCode);
 }
 
-void Shader::compileShader(const char* vertexCode, const char* fragmentCode){
+void Shader::compileShader(const char *vertexCode, const char *fragmentCode)
+{
     shaderId = glCreateProgram();
 
-    if(!shaderId){
+    if (!shaderId)
+    {
         printf("Error creating shader program!\n");
         return;
     }
@@ -27,33 +30,38 @@ void Shader::compileShader(const char* vertexCode, const char* fragmentCode){
 
     glLinkProgram(shaderId);
     glGetProgramiv(shaderId, GL_LINK_STATUS, &result);
-    if (!result){
+    if (!result)
+    {
         glGetProgramInfoLog(shaderId, sizeof(eLog), NULL, eLog);
-        printf("Error linking program '%s'\n",eLog);
+        printf("Error linking program '%s'\n", eLog);
         return;
     }
 
     glValidateProgram(shaderId);
     glGetProgramiv(shaderId, GL_VALIDATE_STATUS, &result);
-    if (!result){
+    if (!result)
+    {
         glGetProgramInfoLog(shaderId, sizeof(eLog), NULL, eLog);
-        printf("Error validating program '%s'\n",eLog);
+        printf("Error validating program '%s'\n", eLog);
         return;
     }
 
     uniformModel = glGetUniformLocation(shaderId, "model");
     uniformProjection = glGetUniformLocation(shaderId, "projection");
     uniformView = glGetUniformLocation(shaderId, "view");
+    uniformAmbientColor = glGetUniformLocation(shaderId, "directionalLight.color");
+    uniformAmbientIntensity = glGetUniformLocation(shaderId, "directionalLight.ambientIntensity");
 }
 
-void Shader::addShader(GLuint theProgram, const char* shaderCode, GLenum shaderType){
+void Shader::addShader(GLuint theProgram, const char *shaderCode, GLenum shaderType)
+{
     GLuint theShader = glCreateShader(shaderType);
 
-    const GLchar* theCode[1];
+    const GLchar *theCode[1];
     theCode[0] = shaderCode;
 
     GLint codeLength[1];
-    codeLength[0]= strlen(shaderCode);
+    codeLength[0] = strlen(shaderCode);
 
     glShaderSource(theShader, 1, theCode, codeLength);
     glCompileShader(theShader);
@@ -62,21 +70,25 @@ void Shader::addShader(GLuint theProgram, const char* shaderCode, GLenum shaderT
     GLchar eLog[1024] = {0};
 
     glGetShaderiv(theShader, GL_COMPILE_STATUS, &result);
-    if (!result){
+    if (!result)
+    {
         glGetShaderInfoLog(theShader, sizeof(eLog), NULL, eLog);
-        printf("Error compiling %d shader '%s'\n",shaderType, eLog);
+        printf("Error compiling %d shader '%s'\n", shaderType, eLog);
         return;
     }
 
     glAttachShader(theProgram, theShader);
 }
 
-void Shader::useShader(){
+void Shader::useShader()
+{
     glUseProgram(shaderId);
 }
 
-void Shader::clearShader(){
-    if (shaderId != 0){
+void Shader::clearShader()
+{
+    if (shaderId != 0)
+    {
         glDeleteProgram(shaderId);
     }
 
@@ -84,34 +96,50 @@ void Shader::clearShader(){
     uniformProjection = 0;
 }
 
-GLuint Shader::getProjectionLocation(){
+GLuint Shader::getProjectionLocation()
+{
     return uniformProjection;
 }
 
-GLuint Shader::getModelLocation(){
+GLuint Shader::getModelLocation()
+{
     return uniformModel;
 }
 
-void Shader::createFromFiles(const char* vertexFile, const char* fragmentFile){
+GLuint Shader::getAmbientIntensityLocation()
+{
+    return uniformAmbientIntensity;
+}
+
+GLuint Shader::getAmbientColorLocation()
+{
+    return uniformAmbientColor;
+}
+
+void Shader::createFromFiles(const char *vertexFile, const char *fragmentFile)
+{
     std::string vertixString = readFile(vertexFile);
     std::string fragmentString = readFile(fragmentFile);
 
-    const char* vertexCode = vertixString.c_str();
-    const char* fragmentCode = fragmentString.c_str();
+    const char *vertexCode = vertixString.c_str();
+    const char *fragmentCode = fragmentString.c_str();
 
     compileShader(vertexCode, fragmentCode);
 }
 
-std::string Shader::readFile(const char* file){
+std::string Shader::readFile(const char *file)
+{
     std::string content;
     std::ifstream fileStream(file, std::ios::in);
-    if (!fileStream.is_open()){
+    if (!fileStream.is_open())
+    {
         printf("Failed to read %s\n", file);
         return "";
     }
 
     std::string line = "";
-    while(!fileStream.eof()){
+    while (!fileStream.eof())
+    {
         std::getline(fileStream, line);
         content.append(line + "\n");
     }
@@ -119,6 +147,7 @@ std::string Shader::readFile(const char* file){
     return content;
 }
 
-GLuint Shader::getViewLocation(){
+GLuint Shader::getViewLocation()
+{
     return uniformView;
 }
