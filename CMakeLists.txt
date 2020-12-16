@@ -15,6 +15,7 @@ set(MAIN_SOURCE_FILES
     Camera.cpp
     Texture.cpp
     Light.cpp
+    Material.cpp
 )
 
 set(MAIN_HEADER_FILES
@@ -24,6 +25,7 @@ set(MAIN_HEADER_FILES
     Camera.hpp
     Texture.hpp
     Light.hpp
+    Material.hpp
 )
 
 add_executable( main ${MAIN_SOURCE_FILES} )

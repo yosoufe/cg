@@ -74,5 +74,10 @@ void Camera::mouseControl(GLfloat xChange, GLfloat yChange){
     update();
 }
 
+glm::vec3 Camera::getCameraPosition()
+{
+    return position;
+}
+
 Camera::~Camera(){
 }
